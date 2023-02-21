@@ -15,11 +15,25 @@ public class CabInvoiceGenerator {
         return distance * MINIMUM_COST_PER_KILOMETER + time * COST_PER_TIME;
     }
     /**
+     * calculate the aggregatetotal for all
+     * @param rides
+     * @return
+     */
+
+    public double calculateFare(Ride[] rides) {
+        double totalFare = 0;
+        for (Ride ride : rides) {
+
+            totalFare += this.calculateFare(ride.getDistance(), ride.getTime());
+        }
+        return totalFare;
+    }
+    /**
      * Main method to print Welcome message
      * @param args
      */
     public static void main(String[] args) {
-        System.out.println("Welcome to CabInvoiceGenerator Application!");
-        System.out.println(calculateFare(2.0, 5));
+        System.out.println("Welcome to CabInvoiceGenerator Application");
+        System.out.println("Fare Value is:" +calculateFare(2.0, 5));
     }
 }
